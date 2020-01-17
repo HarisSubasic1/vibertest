@@ -12,14 +12,14 @@ const ngrok = require('./get_public_url');
 
 var request = require('request');
 
-function createLogger() {
-    const logger = winston.createLogger({
-        level: "debug" // We recommend using the debug level for development
-    });
-    //logger.add(winston.transports.Console, toYAML.config());
-    logger.add( new winston.transports.Console());
-    return logger;
-}
+// function createLogger() {
+//    const logger = winston.createLogger({
+//        level: "debug" // We recommend using the debug level for development
+//    });
+//    //logger.add(winston.transports.Console, toYAML.config());
+//    logger.add( new winston.transports.Console());
+//    return logger;
+//}
 
 function say(response, message) {
     response.send(new TextMessage(message));
@@ -55,7 +55,7 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     })
 }
 
-const logger = createLogger();
+//const logger = createLogger();
 
 if (!process.env.VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     logger.debug('Could not find the Viber account access token key in your environment variable. Please make sure you followed readme guide.');
@@ -63,7 +63,7 @@ if (!process.env.VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
 }
 
 // Creating the bot with access token, name and avatar
-const bot = new ViberBot(logger, {
+const bot = new ViberBot ({
     authToken: process.env.VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY, // Learn how to get your access token at developers.viber.com
     name: "Hotel Grand Sarajevo",
     avatar: "http://www.hotelgrand.com/wp-content/uploads/2018/11/smallogo11.png" // Just a placeholder avatar to display the user
@@ -91,7 +91,7 @@ if (process.env.NOW_URL || process.env.HEROKU_URL) {
 
     http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL));
 } else {
-    logger.debug('Could not find the now.sh/Heroku environment variables. Trying to use the local ngrok server.');
+  //  logger.debug('Could not find the now.sh/Heroku environment variables. Trying to use the local ngrok server.');
     return ngrok.getPublicUrl().then(publicUrl => {
         const http = require('http');
         const port = process.env.PORT || 8080;

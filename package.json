@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "publish": "node bot-deploy.js",
-    "start": "node index.js",
-    "build": "node index.js"
+    "build": "node src/index.js"
   },
   "author": "",
   "license": "ISC",

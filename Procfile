@@ -1,0 +1,1 @@
+worker: bot-deploy.js
